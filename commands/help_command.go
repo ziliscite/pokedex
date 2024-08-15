@@ -1,8 +1,11 @@
 package commands
 
-import "fmt"
+import (
+	"fmt"
+	"pokedex/config"
+)
 
-func helpCommand() error {
+func helpCommand(cfg *config.Config) error {
 	for k, v := range Commands {
 		fmt.Println(k, ": ", v.desc)
 	}

@@ -1,6 +1,9 @@
 package commands
 
-import "fmt"
+import (
+	"fmt"
+	"pokedex/config"
+)
 
 type Executable interface {
 	Execute() error
@@ -9,14 +12,15 @@ type Executable interface {
 type Command struct {
 	name string
 	desc string
-	exec func() error
+	exec func(cfg *config.Config) error
 }
 
-func (c *Command) Execute() {
-	err := c.exec()
+func (c *Command) Execute(cfg *config.Config) error {
+	err := c.exec(cfg)
 	if err != nil {
-		_ = fmt.Errorf("%v: %v", c.name, err)
+		return fmt.Errorf("%v: %v", c.name, err)
 	}
+	return nil
 }
 
 var Commands map[string]Command
@@ -25,5 +29,7 @@ func init() {
 	Commands = map[string]Command{
 		"help": hc,
 		"exit": ec,
+		"map":  mc,
+		"bmap": bmc,
 	}
 }

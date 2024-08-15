@@ -2,9 +2,10 @@ package commands
 
 import (
 	"os"
+	"pokedex/config"
 )
 
-func exitCommand() error {
+func exitCommand(cfg *config.Config) error {
 	os.Exit(0)
 	return nil
 }
