@@ -30,7 +30,7 @@ type Pokemon struct {
 
 type UserPokedex struct {
 	UserExperience int
-	pokedex        map[string]Pokemon
+	pokedex        map[string]Pokemon // maps scary, no public plis
 	mu             *sync.Mutex
 }
 
@@ -52,6 +52,16 @@ func (p *UserPokedex) Get(key string) (*Pokemon, bool) {
 	}
 
 	return &entry, true
+}
+
+func (p *UserPokedex) GetLen() int {
+	return len(p.pokedex)
+}
+
+func (p *UserPokedex) GetEntries() {
+	for _, entry := range p.pokedex {
+		fmt.Println(" - ", entry.Name)
+	}
 }
 
 func (p *UserPokedex) Set(key string, value Pokemon) {

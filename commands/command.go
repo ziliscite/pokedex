@@ -34,5 +34,6 @@ func init() {
 		"explore": exc,
 		"catch":   cc,
 		"inspect": ic,
+		"pokedex": pc,
 	}
 }
