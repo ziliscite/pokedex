@@ -13,12 +13,19 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	options := commands.Commands
 
+	client := config.Client{
+		Endpoint: "https://pokeapi.co/api/v2/",
+		Cache:    pokecache.NewCache(60 * time.Second),
+	}
+
 	cfg := &config.Config{
-		Cache:    new(pokecache.Cache),
+		Client:   client,
 		Next:     nil,
 		Previous: nil,
 	}
 
-	*cfg.Cache = pokecache.NewCache(60 * time.Second)
+	cfg.Next = new(string)
+	*cfg.Next = cfg.Endpoint + "location-area/?offset=0&limit=20"
+
 	repl(scanner, options, cfg)
 }

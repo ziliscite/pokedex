@@ -11,12 +11,11 @@ func exploreCommand(cfg *config.Config, param string) error {
 	if param == "" {
 		return fmt.Errorf("area parameter is required")
 	}
-	route := "https://pokeapi.co/api/v2/location-area/" + param
+	route := cfg.Endpoint + "location-area/" + param
 
 	var dat []byte
 	if val, ok := cfg.Cache.Get(param); ok {
 		dat = val
-		fmt.Println("Cache Hit")
 	} else {
 		body, err := helper.GetBody(route)
 		if err != nil {
@@ -27,12 +26,13 @@ func exploreCommand(cfg *config.Config, param string) error {
 		cfg.Cache.Add(param, dat)
 	}
 
-	pe := handler.PokeExplore{}
-
+	// why not just declare it once in global scope? immutability or something, idk
+	var pe = handler.PokeExplore{}
 	err := helper.UnmarshalExplore(dat, &pe)
 	if err != nil {
 		return fmt.Errorf(err.Error())
 	}
+
 	return nil
 }
 

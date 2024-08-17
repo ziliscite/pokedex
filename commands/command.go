@@ -32,5 +32,6 @@ func init() {
 		"map":     mc,
 		"mapb":    mbc,
 		"explore": exc,
+		"catch":   cc,
 	}
 }

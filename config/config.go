@@ -1,9 +1,16 @@
 package config
 
-import "pokedex/pokecache"
+import (
+	"pokedex/pokecache"
+)
+
+type Client struct {
+	Endpoint string
+	Cache    pokecache.Cache
+}
 
 type Config struct {
-	Cache    *pokecache.Cache
+	Client
 	Next     *string `json:"next"`
 	Previous *string `json:"previous"`
 }
