@@ -38,6 +38,6 @@ func exploreCommand(cfg *config.Config, param string) error {
 
 var exc = Command{
 	name: "explore",
-	desc: "Display the name of all the Pokémon in a given area",
+	desc: "Display the name of all the Pokémon in a given area.",
 	exec: exploreCommand,
 }

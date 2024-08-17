@@ -14,6 +14,6 @@ func helpCommand(cfg *config.Config, param string) error {
 
 var hc = Command{
 	name: "help",
-	desc: "Displays a help message",
+	desc: "Displays a help message.",
 	exec: helpCommand,
 }

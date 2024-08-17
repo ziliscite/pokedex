@@ -31,6 +31,6 @@ func mapCommand(cfg *config.Config, param string) error {
 
 var mc = Command{
 	name: "map",
-	desc: "Display the names of the next 20 location areas in the Pokemon world",
+	desc: "Display the names of the next 20 location areas in the Pokemon world.",
 	exec: mapCommand,
 }

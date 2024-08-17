@@ -33,6 +33,6 @@ func mapbCommand(cfg *config.Config, param string) error {
 
 var mbc = Command{
 	name: "mapb",
-	desc: "Display the names of the previous 20 location areas in the Pokemon world",
+	desc: "Display the names of the previous 20 location areas in the Pokemon world.",
 	exec: mapbCommand,
 }

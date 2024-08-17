@@ -16,6 +16,6 @@ func pokedexCommand(cfg *config.Config, param string) error {
 
 var pc = Command{
 	name: "inspect",
-	desc: "Allow players to see details about a Pokemon if they have caught it before.",
+	desc: "Allow players to see all of the Pokemon they have caught.",
 	exec: pokedexCommand,
 }

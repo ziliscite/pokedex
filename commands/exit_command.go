@@ -12,6 +12,6 @@ func exitCommand(cfg *config.Config, param string) error {
 
 var ec = Command{
 	name: "exit",
-	desc: "Exit the Pokedex",
+	desc: "Exit the Pokedex.",
 	exec: exitCommand,
 }

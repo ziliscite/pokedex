@@ -65,6 +65,6 @@ func catchCommand(cfg *config.Config, param string) error {
 
 var cc = Command{
 	name: "catch",
-	desc: "Catch a Pokemon and adds them to the user's Pokedex",
+	desc: "Catch a Pokemon and adds them to the user's Pokedex.",
 	exec: catchCommand,
 }
