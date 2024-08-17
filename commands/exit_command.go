@@ -5,7 +5,7 @@ import (
 	"pokedex/config"
 )
 
-func exitCommand(cfg *config.Config) error {
+func exitCommand(cfg *config.Config, param string) error {
 	os.Exit(0)
 	return nil
 }

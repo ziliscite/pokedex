@@ -5,7 +5,7 @@ import (
 	"pokedex/config"
 )
 
-func helpCommand(cfg *config.Config) error {
+func helpCommand(cfg *config.Config, param string) error {
 	for k, v := range Commands {
 		fmt.Println(k, ": ", v.desc)
 	}

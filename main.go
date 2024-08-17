@@ -5,20 +5,20 @@ import (
 	"os"
 	"pokedex/commands"
 	"pokedex/config"
-	"strings"
+	"pokedex/pokecache"
+	"time"
 )
-
-func formatInput(i string) string {
-	return strings.ToLower(strings.TrimSpace(i))
-}
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	options := commands.Commands
+
 	cfg := &config.Config{
-		Cache:    nil,
+		Cache:    new(pokecache.Cache),
 		Next:     nil,
 		Previous: nil,
 	}
+
+	*cfg.Cache = pokecache.NewCache(60 * time.Second)
 	repl(scanner, options, cfg)
 }
