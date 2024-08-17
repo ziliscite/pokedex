@@ -5,6 +5,7 @@ import (
 	"os"
 	"pokedex/commands"
 	"pokedex/config"
+	"pokedex/player_pokedex"
 	"pokedex/pokecache"
 	"time"
 )
@@ -16,6 +17,7 @@ func main() {
 	client := config.Client{
 		Endpoint: "https://pokeapi.co/api/v2/",
 		Cache:    pokecache.NewCache(60 * time.Second),
+		Dex:      player_pokedex.NewUserPokedex(),
 	}
 
 	cfg := &config.Config{

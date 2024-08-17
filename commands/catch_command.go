@@ -10,28 +10,34 @@ import (
 	"time"
 )
 
-var Dex = player_pokedex.NewUserPokedex()
-
 func catchCommand(cfg *config.Config, param string) error {
 	if param == "" {
 		return fmt.Errorf("pokemon parameter is required")
 	}
 
-	if val, ok := Dex.Pokedex[param]; ok {
+	if val, ok := cfg.Dex.Get(param); ok {
 		fmt.Printf("%s is already caught!\n", val.Name)
 		return nil
 	}
 
 	route := cfg.Endpoint + "pokemon/" + param
-	body, err := helper.GetBody(route)
-	if err != nil {
-		return fmt.Errorf(err.Error())
+
+	// After deliberate consideration, I don't want to wait for each unsuccessful attempt
+	var dat []byte
+	if val, ok := cfg.Cache.Get(param); ok {
+		dat = val
+	} else {
+		body, err := helper.GetBody(route)
+		if err != nil {
+			return fmt.Errorf(err.Error())
+		}
+
+		dat = body
+		cfg.Cache.Add(param, dat)
 	}
 
-	cfg.Cache.Add(param, body)
-
 	pokemon := player_pokedex.Pokemon{}
-	err = json.Unmarshal(body, &pokemon)
+	err := json.Unmarshal(dat, &pokemon)
 	if err != nil {
 		return fmt.Errorf(err.Error())
 	}
@@ -48,9 +54,9 @@ func catchCommand(cfg *config.Config, param string) error {
 	fmt.Println()
 
 	res := rand.Intn(pokemon.BaseExperience)
-	if res > Dex.UserExperience {
+	if res > cfg.Dex.UserExperience {
 		fmt.Println(param, "was caught!")
-		Dex.Set(param, pokemon)
+		cfg.Dex.Set(param, pokemon)
 		return nil
 	}
 	fmt.Println(param, "has escaped...")
