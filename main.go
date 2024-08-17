@@ -16,6 +16,7 @@ func main() {
 	scanner := bufio.NewScanner(os.Stdin)
 	options := commands.Commands
 	cfg := &config.Config{
+		Cache:    nil,
 		Next:     nil,
 		Previous: nil,
 	}

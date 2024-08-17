@@ -30,6 +30,6 @@ func init() {
 		"help": hc,
 		"exit": ec,
 		"map":  mc,
-		"bmap": bmc,
+		"mapb": mbc,
 	}
 }
